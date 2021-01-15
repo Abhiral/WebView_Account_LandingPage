@@ -1,0 +1,14 @@
+﻿@page {
+    margin-top:5cm;
+    margin-bottom: 2cm;
+    margin-left: 2cm;
+    margin-right: 2cm;
+}
+@media print {
+    label {
+        color: red;
+    }
+    .col-sm-1{
+        color:red;
+    }
+}

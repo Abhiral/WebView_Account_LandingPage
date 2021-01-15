@@ -1,0 +1,62 @@
+﻿@using FormCollectionHelper
+
+@model SajiloAccount.Models.InventoryTransactionDetailModel
+
+@using (Html.BeginCollectionItem("TransactionDetails"))
+{
+    
+
+    <div class="indivisual-row table-sty-inventory table-body">
+
+        <div class="Cell-sn sec-sn item">
+            @ViewBag.Counter
+        </div>
+        <div class="sec-item item">
+            @Html.Hidden("stock", (string)ViewBag.IsStockLow, new { @class = "stock-check" })
+            @Html.HiddenFor(model => model.InventoryTransactionDetailId)
+            @Html.HiddenFor(model => model.Stock, new { @class = "good-stock" })
+            @Html.HiddenFor(model => model.GoodsId, new { @class = "Goods-Id" })
+            @Html.TextBoxFor(model => model.GoodsName, new { @readonly = true, @class = "form-control " })
+            @Html.ValidationMessageFor(model => model.GoodsName)
+        </div>
+        <div class="sec-rate item">
+            @Html.TextBoxFor(x => x.GoodsRate, new { @class = "good-rate form-control text-right" })
+            @Html.ValidationMessageFor(model => model.GoodsRate)
+        </div>
+        <div class="sec-Quantity item">
+            @Html.TextBoxFor(model => model.Quantity, new { @class = "good-quantity form-control text-right" })
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+        <div class="sec-total item">
+            @Html.TextBoxFor(model => model.SubTotal, new { @readonly = true, @class = "sub-total form-control text-right", Value = String.Format("{0:0.00}", Model.SubTotal) })
+            @Html.ValidationMessageFor(model => model.SubTotal)
+        </div>
+        <div class="sec-total item">
+            @Html.TextBoxFor(model => model.DiscountPercentage, new { @class = "discount-percentage form-control" })
+            @Html.ValidationMessageFor(model => model.DiscountPercentage)
+        </div>
+        <div class="sec-total item">
+            @Html.TextBoxFor(model => model.Discount, "{0:0.00}", new { @class = "discount-amt form-control" })
+            @Html.ValidationMessageFor(model => model.Discount)
+        </div>
+        <div class="sec-total item">
+            @Html.TextBoxFor(model => model.Total, new { @readonly = true, @class = "good-total form-control text-right", Value = String.Format("{0:0.00}", Model.Total) })
+            @Html.ValidationMessageFor(model => model.Total)
+        </div>
+        @if (ViewBag.EditCase != "EditCase")
+        {
+            <div class="sec-action item">
+                <a class="btn-remove row-button btn btn-sm btn-danger btn-delete" onclick="DeleteRow(this)"><i class="fas fa-trash-alt"></i> Remove</a>
+            </div>
+        }
+
+    </div>
+
+}
+
+
+<script>
+    $(function () {
+        $('#items-table-div').scrollTop($('#items-table-div').prop('scrollHeight'));
+    })
+</script>

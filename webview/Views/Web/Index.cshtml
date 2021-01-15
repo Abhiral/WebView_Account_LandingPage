@@ -1,0 +1,449 @@
+﻿@model SajiloAccount.Models.LoginModel
+@{
+    Layout = "";
+    bool passwordIssue=false;
+    bool expiry = false;
+    if(Request.QueryString["passwordIssue"] !=null)
+    {
+        passwordIssue = Convert.ToBoolean(Request.QueryString["passwordIssue"]);
+    }
+    if (Request.QueryString["expiry"] != null)
+    {
+        expiry = Convert.ToBoolean(Request.QueryString["expiry"]);
+    }
+    
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Saral Accounting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/webview/css/all.css">
+    <link rel="stylesheet" href="~/Content/webview/css/slick.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/webview/css/style1.css">
+    <link rel="stylesheet" href="~/Content/webview/css/responsive.css">
+    <link href="~/Content/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr/loader.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="hdr">
+        <div class="loader-wrap"><span class="loader"><span></span><span></span><span></span><span></span><span></span></span></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-sm-6 col-md-3">
+                    <div class="site-logo">
+                        <a href="#index-banner" class="header-brand">
+                            <img src="~/Content/webview/images/mininginfologo.png" width="35%" alt="Mining Infosys logo">
+                            <h5 id="log">Saral Accounting</h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-9">
+                    <div class="item-right">
+                        <nav>
+                            <div class="hamburger-menu">
+                                &#9776;
+                            </div>
+                            <ul class="menu">
+                                <li><a href="#clients-page" title="">Clients</a></li>
+                                <li><a href="#pricing-page" title="">Pricing</a></li>
+                                <li><a href="#service-page" title="">Services</a></li>
+                                <li><a href="#support-page" title="">Support</a></li>
+                                <li><a href="#sign-up-page" title="">Register</a></li>
+                            </ul>
+                        </nav>
+                        @*<a href="#sign-up-page" class="button button1" title="">Demo</a>*@
+                        @*<a href="ademo.karmathalo.com" class="button button1" title="">Demo</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header><!-- /header -->
+
+    <main>
+        <section id="index-banner">
+            <div class="index-banner overlay">
+                <div class="vertical-center">
+                    <div class="container">
+                        <div class="row top">
+                            <div class="col-md-6">
+                                <div class="headline">
+                                    <h6> FINANCIAL SOFTWARE</h6>
+                                    <h1>Empowering <br> small business owners<br> every step of the way</h1>
+                                </div>
+                                <div class="sign-in-form">
+                                    <h3 class="title">Access Your Account</h3>
+                                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "loginform" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "a", @placeholder = "User Name(Email)", name = "Email" })
+                                        @Html.ValidationMessageFor(m => m.UserName)
+                                        @Html.PasswordFor(m => m.Password, new { @id = "login-password", @class = "a", @placeholder = "Password", type = "password", name = "password" })
+                                        @Html.ValidationMessageFor(m => m.Password)
+
+                                        <input class="b button" type="submit" id="btn-login" value="Sign in" />
+                                    }
+                                    <p>
+                                        <a href='@Url.Action("forgotpassword","Account")'>Forgot Password ?</a>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section" id="clients-page">
+            <div class="container">
+                <h4 id="happy">Our Happy Customers</h4>
+                <div class="slider circtxt" id="test">
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Basu HSS <br>Bhaktapur</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Jaycees SS <br>Bhaktapur</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Mt. Senai <br>Naya Thimi</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Mt. SEB <br>Kathmandu</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Basu HSS <br>Bhaktapur</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Jaycees SS <br>Bhaktapur</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Mt. Senai <br>Naya Thimi</h5></div>
+                    </div>
+                    <div class="slider-item">
+                        <div class="dot"><i class="far fa-smile"></i><h5>Mt. SEB <br>Kathmandu</h5></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing-page">
+            <div class="third-page">
+                <div class="container">
+                    <div class="divide row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="left-para">
+                                <h4>Focus on growing your business, trust the accounting to us.</h4>
+                                <p>Your online accounting, auditing, and finance professional. </p>
+                                <p>Price : Rs 10,000 Annually for 2 users</p>
+                                <p>can be also subscribed monthly at Rs. 1000</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="right-img">
+                                <img src="~/Content/webview/images/pricingimage.jpg" alt="price-value relationship">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="service-page">
+            <div class="fourth-page">
+                <div class="container">
+                    <div class="center-para">
+                        <!-- <h4>Post Transactions <i class="fas fa-arrow-right"></i> Generate Reports <i class="fas fa-arrow-right"></i> Make Financial Decision Yourself.</h4> -->
+                        <h4>Our Services</h4>
+                    </div>
+                    <div class="center row">
+                        <div class="col-md-4">
+                            <div class="image">
+                                <img class="pic" src="~/Content/webview/images/3-statements-1-302x300.png" alt="Cash Flow">
+                            </div>
+
+                            <h4>Accounting</h4>
+                            <p>Accounting comprises of different engines to run an enterprise smoothly. Such as operational day to day incoming and outgoing cash. Visualization of current financial status of company gives the apparent view of overall company.</p>
+                            <p class="brdr-btm">This modules based on double entry system of accounting which makes the accountant easier. Generating the final accounts such as trading account, trial balance, P/L account and Balance Sheets is just next to a click on a button.</p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="image">
+                                <img class="pic" src="~/Content/webview/images/inventory-stock-illustration_csp11751485.jpg" alt="Getting paid">
+                            </div>
+
+                            <h4>Trading Inventory</h4>
+                            <p class="brdr-btm">Trading inventory module tracks the stock-in and stock-out of an Business Enterprise. Make ease for users to maintain the Stock,  Purchase, Return, Sales, Vendor and Client Information in a prompt time. Reports regarding the above mentioned topics can be generated in no time.</p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="image">
+                                <img class="pic" src="~/Content/webview/images/images.png" alt="Fearless accounting guide">
+                            </div>
+
+                            <h4>Human Resource</h4>
+                            <p>Detailed information of employee regarding introduction, job history, academic qualification are the key source to quantify a person to evaluate.</p>
+                            <p class="hr-second-para">Department wise, post wise and even individually customized salary calculation on the basis of different allowances is the major challenge for the HR every month. This Module makes it really simple with just few clicks.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="support-page">
+            <div class="fifth-page">
+                <div class="container">
+                    <h4>Help & Support</h4>
+                    <div class="center-below row">
+                        <div class="col-md-6">
+                            <img src="~/Content/webview/images/techsupport.jpg" width="40%" height="205px" alt="Spot community">
+                            <h2>Technical Support </h2>
+                            <p>Our Expert technical assistants are there  to enjoy fixing your problems in software and train you to run the software with maximum efficiency.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="~/Content/webview/images/IT-helpdesk.jpg" width="40%" height="205px" alt="Spot support">
+                            <h2>Help Desk </h2>
+                            <p>Is always waiting for your query and ready to make you feel comfort to customize the software as per your requirement. Feel free to contact or visit our office. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 	<section class="sixth-page" id="more-page">
+                <div class="container">
+                    <div class="accordion" id="accordionExample">
+                         <div class="card">
+                             <div class="card-header" id="headingOne">
+                                 <h2 class="mb-0">
+                                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Frequently asked questions
+
+                                    <i class="fas fa-plus"></i>
+                                   </button>
+
+                                 </h2>
+                             </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                 <div class="card-body">
+                                     <h6>Is your software actually free?</h6><br>
+                                     <p>Yes really, no tricks! Our software is 100% free, no trials, no limitations, and no hidden fees. Use it as much as you want, for as long as you want, and we won’t charge a cent. Our free software includes invoicing, accounting, and receipt scanning.</p><br>
+                                     <h6>What’s the catch? How does Wave make money?</h6><br>
+                                     <p>Wave makes money from financial services that make running your business faster. We offer payroll services in Canada and the U.S. at a super affordable price. We also allow businesses to accept payments online so you can get invoices paid faster; we charge a competitive 2.9% + 30¢ fee to process credit cards, and 1% for bank payments (where available).</p><br>
+                                     <h6>Is my data safe?</h6><br>
+                                     <p>Completely safe. Our servers are protected physically and electronically. Any connection between you and Wave is protected by 256-bit SSL encryption. Wave is a PCI-DSS Level 1 Service Provider.</p><br>
+                                     <h6>Do I need to install any software?</h6>
+                                     <p>Wave is 100% web-based, so you just need an internet connection and browser.</p><br>
+                                     <p>You can, however, download and install our mobile invoicing and receipt scanning apps for iOS and Android.</p><br>
+                                     <h6>Do I need to enter my credit card details to sign up?</h6><br>
+                                     <p>Put your wallet away, you won’t need to enter in any credit card ever, unless you want to use our payroll service. Just create your account and get started for free.</p>
+                                 </div>
+                            </div>
+                         </div>
+
+                    </div>
+                </div>
+
+            </section> -->
+    </main> <!-- /main -->
+
+    <footer>
+        <section class="gradient-navy-purple" id="sign-up-page">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-md-6">
+                        <h2>Everything you need to confidently run your business</h2>
+                    </div>
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("CreateEditEnquiry", "Web", FormMethod.Post, new { id = "enquiry-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <input class="c" type="text" name="InquiryBy" id="InquiryBy" placeholder="Your full name">
+                            @Html.ValidationMessage("InquiryBy")
+                            <br>
+                            <input class="c" type="number" name="ContactNumber" id="ContactNumber" placeholder="Phone Number">@Html.ValidationMessage("ContactNumber")
+                            <input class="c" type="email" name="Email" id="Email" placeholder="E-Mail Address">@Html.ValidationMessage("Email")
+                            <button class="d" type="submit">Register Now</button>
+                            <p id="privacy1"> By registering, you agree to the <a href='@Url.Content("~/Web/Agreement")' target="_blank"> Terms of Use</a> @*and <a href="#"> Privacy Policy</a>.*@</p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="last" id="last">
+            <div class="container">
+                <h4 id="mod">Modules Integrated in System</h4>
+                <div class="row end">
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <h6>ACCOUNTING</h6>
+                        <ul class="address">
+                            <li><i class="fas fa-hand-point-right"></i> Account Head</li>
+                            <li><i class="fas fa-hand-point-right"></i> Vouchers</li>
+                            <li><i class="fas fa-hand-point-right"></i>Trial Balance</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <h6>HUMAN RESOURCE</h6>
+                        <ul class="address">
+                            <li><i class="fas fa-hand-point-right"></i> Employees</li>
+                            <li><i class="fas fa-hand-point-right"></i> Payroll</li>
+                            <li><i class="fas fa-hand-point-right"></i>Advance Salary</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <h6>TRADING INVENTORY</h6>
+                        <ul class="address">
+                            <li><i class="fas fa-hand-point-right"></i> Goods</li>
+                            <li><i class="fas fa-hand-point-right"></i> Inventory Parties</li>
+                            <li><i class="fas fa-hand-point-right"></i> Trading (In/Out)</li>
+                            <li><i class="fas fa-hand-point-right"></i> Stock Ledger</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <h6>REPORTS</h6>
+                        <ul class="address">
+
+                            <li><i class="fas fa-hand-point-right"></i> Ledger Detail</li>
+                            <li><i class="fas fa-hand-point-right"></i> Trading Account</li>
+                            <li><i class="fas fa-hand-point-right"></i> Profit/Loss Report</li>
+                            <li><i class="fas fa-hand-point-right"></i> Balance Sheet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="last-footer" id="last-footer">
+            <div class="container">
+                <div class="contact">
+                    <ul id="lis">
+                        <li class="list-inline-items"><span>Contact Us :</span> </li>
+                        <li class="list-inline-items">Liwali-08, Bhaktapur, Nepal</li>
+                        <li class="list-inline-items"><i class="fas fa-globe"></i> : <a href="http://mininginfosys.com.np/" target="_blank">MiningInfosys.com.np</a></li>
+                        <li class="list-inline-items"><i class="fas fa-envelope"></i> : <a href="mailto:sarallekha@gmail.com" target="_blank">sarallekha@gmail.com</a> </li>
+                        <br>
+                        <li class="list-inline-items"><i class="fas fa-phone-alt"></i> : <a href="tel:+9779841522751" target="_blank">9841522751</a> </li>
+                        <br>
+
+                        <li class="list-inline-items"><p> <span>Follow us at :</span></p></li>
+                        <li class="list-inline-items social-site">
+                            <a class="custom-color-row-changer" href="https://www.facebook.com/mininginfosys/?epa=SEARCH_BOX" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-items social-site"><a class="custom-color-row-changer" href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-items social-site"><a class="custom-color-row-changer" href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li class="list-inline-items social-site"><a class="custom-color-row-changer" href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-items social-site"><a class="custom-color-row-changer" href=""><i class="fab fa-vine"></i></a></li>
+
+                    </ul>
+                </div>
+                <div class="border-top"></div>
+                <div class="row bottom">
+                    <div class="col-12 col-sm-12 col-md-12">
+                        <div class="text-muted">
+                            <small>Copyright © @System.DateTime.Now.Year - <img src="~/Content/webview/images/mininginfologo.png" alt="Company logo"> Mining Infosys Pvt Ltd. All Rights Reserved.</small> <br>
+                        </div>
+                        @*<ul>
+                                <li class="list-inline-items"><a href="#">Privacy Policy</a></li>
+                                <li class="list-inline-items"><a href="#">Terms of Use</a></li>
+                                <li class="list-inline-items"><a href="#">Security</a></li>
+                            </ul>*@
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </footer> <!-- /footer -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+    @*<script src="~/Content/webview/js/jquery-3.1.1.min.js"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/Content/datatable-1.10.19/dataTable.min.css" rel="stylesheet" />
+    <script src="~/Content/datatable-1.10.19/dataTable.min.js"></script>
+    <script src="~/Content/webview/js/slick.js"></script>
+    <script src="~/Content/webview/js/script.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Content/toastr/toastr.min.js"></script>
+    <script src="~/Content/toastr/customalert.js"></script>
+    <script src="~/Content/toastr/WorkForce.js"></script>
+    <script src="~/Scripts/customjs.js"></script>
+    <script>
+        $(function () {
+            if ('@passwordIssue'=='True')
+            {
+                ShowMessage("warning", "warning", "Invalid Username or Password");
+            }
+            if ('@expiry' == 'True') {
+                ShowMessage("warning", "warning", "Sorry !! Your Login is Deactivated. Please Contact to your Administrator!!");
+            }
+            $('#enquiry-form').ajaxForm({
+                beforeSubmit: function () {
+                    if ($('#InquiryBy').val().length < 5) {
+                        ShowMessage("warning", "warning", "Please Fill Valid Name");
+                        return false;
+                    }
+                    if ($('#ContactNumber').val().length < 5) {
+                        ShowMessage("warning", "warning", "Please Fill Valid Contact Number");
+                        return false;
+                    }
+                    $('#enquiry-form').removeData("validator").removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse($('#enquiry-form'));
+                    if ($("#enquiry-form").valid()) {
+                        WorkForce.loader.show();
+                    } else {
+                        return false;
+                    }
+                },
+                success: function (result) {
+                    if (result.Success) {
+                        WorkForce.loader.hide();
+                        $('#InquiryBy').val('');
+                        $('#Email').val('');
+                        $('#ContactNumber').val('');
+                        ShowMessage("success", "success", result.Msg);
+                    } else {
+                        WorkForce.loader.hide();
+                        ShowMessage("error", "error", result.Msg);
+                    }
+                },
+                error: function () {
+                    WorkForce.loader.hide();
+                    ShowMessage("error", "error", "error in registration!!");
+                }
+            });
+            $('#login-password').on('keydown', function (e) {
+                if (e.keyCode == 13)
+                    $('#btn-login').click();
+            })
+        });
+    </script>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5dbac21ce4c2fa4b6bd953c2/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+</body>
+</html>
